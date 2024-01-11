@@ -50,8 +50,14 @@ export class CdkNextApp2Stack extends cdk.Stack {
       }),
     })
 
-    amplifyApp.addBranch('main', {
-      stage: 'PRODUCTION',
-    })
+    let branchName = 'main';
+    amplifyApp.addBranch(branchName)
+
+    //output the url
+    new cdk.CfnOutput(this, 'AmplifyAppUrl', {
+      value: `https://${branchName}.${amplifyApp.appId}.amplifyapp.com`,
+      description: 'Amplify App URL',
+    });
+    
   }
 }
